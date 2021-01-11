@@ -1,0 +1,19 @@
+{
+    "name": "el-sheref/phpmvc-framework",
+    "description": "Build Simple Classes And Helpers That Help In Very Small And Small Projects",
+    "type": "library",
+    "authors": [
+        {
+            "name": "hatem-mohamed-elsheref",
+            "email": "hatem_mohamed_elsheref@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": ["src/Helpers/paths.php"]
+    }
+}
