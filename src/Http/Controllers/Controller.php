@@ -4,7 +4,12 @@
 namespace App\Http\Controllers;
 
 
-class Controller
+use App\Core\Application;
+
+abstract class Controller
 {
+    public function layout($layout){
+        Application::$app->layout=$layout;
+    }
 
 }

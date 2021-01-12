@@ -9,8 +9,10 @@ class Request
 
     private string $method;
     private string $path;
+    private array $body;
 
     public function __construct(){
+        $this->body = [];
         $this->resolveUrl();
     }
 
@@ -22,7 +24,7 @@ class Request
         $this->path=(empty($url))?'/':$url;
     }
 
-    public function getMethod(){
+    public function method(){
         return $this->method;
     }
     public function getPath(){
@@ -31,5 +33,34 @@ class Request
     public function getFirstSegment(){
         $parts = explode('/',$this->getPath());
         return $parts[0];
+    }
+    public function isGet(){
+        return $this->method === 'get';
+    }
+    public function isPost(){
+        return $this->method === 'post';
+    }
+
+    private function prepareRequestBody(){
+        $body=[];
+        if ($this->isGet())
+            foreach ($_GET as $key => $value)
+                $body[$key] = filter_input(INPUT_GET,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        else
+            foreach ($_POST as $key => $value)
+                 $body[$key] = filter_input(INPUT_POST,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $this->body = $body;
+    }
+    public function body(){
+        $this->prepareRequestBody();
+        return $this->body;
+    }
+    public function getUrlParams(){
+        $body=[];
+            foreach ($_GET as $key => $value)
+                $body[$key] = filter_input(INPUT_GET,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            return $body;
+
     }
 }

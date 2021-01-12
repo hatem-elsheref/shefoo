@@ -12,6 +12,8 @@ define('ERRORS_DIRECTORY','errors');
 
 // url
 define('APP_NAME','SHEFOO');
+define('APP_AUTHOR','Hatem Mohamed');
+define('APP_DESC','Shefoo Mvc App');
 define('APP_URL','http://localhost:2020');
 
 // general

@@ -28,7 +28,7 @@ class Router
     }
     public function resolve(){
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
         if ($callback === false){
             return $this->showErrorPage(Application::$app->config['ERRORS_DIRECTORY'].'.404');
@@ -41,7 +41,7 @@ class Router
 
         if (is_string($callback)){
             if (file_exists($this->prepareViewPath($callback)))
-                return $this->view(Application::$app->layout,$callback);
+                return $this->view($callback);
             else{
                 /*
                 $this->response->setStatusCode(404);
@@ -51,18 +51,24 @@ class Router
             }
         }
 
-        if (is_callable($callback) || is_array($callback))
-            return call_user_func($callback);
+        if (is_array($callback)){
+            $callback[0] = new $callback[0]();
+        }
+            return call_user_func($callback,Application::$app->request);
 
 
     }
 
-    private function view($layout,$view){
+    public function view($view,$params=[]){
+        $layout = Application::$app->layout;
         $layoutContent = $this->getLayoutContent($layout);
-        $viewContent = $this->getViewContent($view);
+        $viewContent = $this->getViewContent($view,$params);
         return str_replace('{{content}}',$viewContent,$layoutContent);
     }
-    private function getViewContent($view){
+    private function getViewContent($view,$params=[]){
+        foreach ($params as $key => $value){
+            $$key = $value;
+        }
         ob_start();
         include_once $this->prepareViewPath($view);
         return ob_get_clean();

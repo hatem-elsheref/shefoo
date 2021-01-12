@@ -1,4 +1,5 @@
 <?php
 
+use App\Core\General\Route;
 
-$app->router->get('/'.DASHBOARD_PREFIX.'/contact','website.contactView');
+Route::get('/'.DASHBOARD_PREFIX.'/contact','website.contactView');

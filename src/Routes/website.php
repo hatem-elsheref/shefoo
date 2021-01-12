@@ -1,19 +1,28 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Core\General\Route;
+
+Route::get('/login',[LoginController::class,'showLoginForm']);
+Route::post('/login',[LoginController::class,'login']);
+Route::get('/register',[RegisterController::class,'showRegisterForm']);
+Route::post('/register',[RegisterController::class,'register']);
 
 
-$app->router->get('/',function (){
+
+Route::get('/',function (){
     return 'Hello landing Page';
 });
 
-$app->router->get('/home',function (){
+Route::get('/home',function (){
     return 'Hello Home Page';
 });
 
-$app->router->get('/about',function (){
+Route::get('/about',function (){
     return 'Hello About Page';
 });
-$app->router->get('/contact','website.contactView');
+Route::get('/contact','website.contactView');
 
-$app->router->get('/users',[UserController::class,'index']);
+Route::get('/users',[UserController::class,'index']);
