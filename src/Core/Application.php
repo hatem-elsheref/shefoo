@@ -8,6 +8,8 @@ class Application{
     public Request $request;
     public Response $response;
     public array $config;
+    public array $old=[];
+    public array $errors=[];
     public static $app;
 
     public function __construct($config){

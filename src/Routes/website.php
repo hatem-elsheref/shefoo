@@ -1,14 +1,11 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Core\General\Route;
+use App\Core\Auth;
 
-Route::get('/login',[LoginController::class,'showLoginForm']);
-Route::post('/login',[LoginController::class,'login']);
-Route::get('/register',[RegisterController::class,'showRegisterForm']);
-Route::post('/register',[RegisterController::class,'register']);
+
+Auth::routes(['login'=>true,'register'=>true,'forget'=>true]);
 
 
 

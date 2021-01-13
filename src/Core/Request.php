@@ -45,10 +45,10 @@ class Request
         $body=[];
         if ($this->isGet())
             foreach ($_GET as $key => $value)
-                $body[$key] = filter_input(INPUT_GET,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $body[$key] = $this->filter(filter_input(INPUT_GET,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         else
             foreach ($_POST as $key => $value)
-                 $body[$key] = filter_input(INPUT_POST,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                 $body[$key] = $this->filter(filter_input(INPUT_POST,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
             $this->body = $body;
     }
@@ -59,8 +59,13 @@ class Request
     public function getUrlParams(){
         $body=[];
             foreach ($_GET as $key => $value)
-                $body[$key] = filter_input(INPUT_GET,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $body[$key] = $this->filter(filter_input(INPUT_GET,$key,FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             return $body;
 
+    }
+
+
+    private function filter($value){
+        return html_entity_decode(htmlspecialchars(strip_tags($value)),ENT_QUOTES);
     }
 }

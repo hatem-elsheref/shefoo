@@ -86,6 +86,7 @@ trait Validator
 
         }
 
+        Application::$app->errors = $this->errors;
 
         return empty($this->errors);
     }
@@ -101,6 +102,6 @@ trait Validator
     }
 
     public function getFirstError($attribute){
-        return $this->errors[$attribute][0];
+        return $this->errors[$attribute][0] ?? false;
     }
 }

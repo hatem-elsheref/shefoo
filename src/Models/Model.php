@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use App\Core\Application;
 use App\Core\Validator;
 
 abstract class Model{
@@ -20,5 +21,6 @@ abstract class Model{
         foreach($data as $key => $value){
             $this->{$key} = $value ?? '';
         }
+        Application::$app->old = $data;
     }
 }
