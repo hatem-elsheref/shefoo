@@ -14,11 +14,11 @@ class Auth
             Route::post('/login',[LoginController::class,'login']);
             Route::post('/logout',[loginController::class,'logout']);
         }
-        if ($options['register'] === true){
+        if ($options['register'] === true && $options['login'] === true){
             Route::get('/register',[RegisterController::class,'showRegisterForm']);
             Route::post('/register',[RegisterController::class,'register']);
         }
-        if ($options['forget'] === true){
+        if ($options['register'] === true && $options['login'] === true && $options['forget'] === true){
             Route::get('/forget-password',[ForgetPassword::class,'showForgetForm']);
             Route::post('/forget-password',[ForgetPassword::class,'sendResetUrl']);
             Route::get('/reset-password',[ForgetPassword::class,'showResetForm']);

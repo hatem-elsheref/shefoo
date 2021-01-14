@@ -16,6 +16,13 @@ $configuration=[
     'DEFAULT_PREFIX'   => DEFAULT_PREFIX,
     'DEFAULT_LAYOUT'   => DEFAULT_LAYOUT,
     'ERRORS_DIRECTORY' => ERRORS_DIRECTORY,
+    'database'         =>[
+        'database_hostname'   =>DB_HOST,
+        'database_port'       =>DB_PORT,
+        'database_user'       =>DB_USER,
+        'database_password'   =>DB_PASS,
+        'database_name'       =>DB_NAME
+    ]
 ];
 $app = new Application($configuration);
 

@@ -7,6 +7,7 @@ class Application{
     public Router $router;
     public Request $request;
     public Response $response;
+    public Database $connection;
     public array $config;
     public array $old=[];
     public array $errors=[];
@@ -16,6 +17,7 @@ class Application{
         $this->config=$config;
         $this->request = new Request();
         $this->response = new Response();
+        $this->connection = new Database($this->config['database']);
         $this->router = new Router($this->request,$this->response);
         $this->selectLayout();
         self::$app=$this;

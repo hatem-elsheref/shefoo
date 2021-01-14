@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Database\Migrations;
+use App\Core\Blueprint;
+class _temp_{
+    public function up(Blueprint $table){
+        $table->start('');
+        $table->id();
+        // your table here ..
+        $table->created_at();
+        $table->end();
+    }
+    public function down(Blueprint $table){
+        $table->dropTable('');
+    }
+}

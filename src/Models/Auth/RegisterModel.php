@@ -12,6 +12,9 @@ class RegisterModel extends Model
     public string $passwordConfirmation;
 
     public function __construct(){
+        static::$tableName ='users';
+        static::$PK ='id';
+
         $this->name = '';
         $this->email = '';
         $this->password = '';
