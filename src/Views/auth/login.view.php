@@ -3,6 +3,9 @@
     use App\Core\Form;
         $form = Form::Begin(['class'=>'form-signin','action'=>'/login','method'=>'post'],$model??null);
     ?>
+    <?php if (session()->hasFlash('success')):?>
+        <div class="alert alert-success"><?php echo session()->getFlash('success')?></div>
+        <?php endif;?>
     <img class="mb-4" src="<?=authAssets('images/user.png')?>"  width="100" height="100">
     <h1 class="h3 mb-3 font-weight-normal">Login</h1>
     <?php $form->label('inputEmail','sr-only','Email address');?>

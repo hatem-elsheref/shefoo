@@ -1,5 +1,18 @@
 <?php
 
+if (!function_exists('redirect')){
+    function redirect($path){
+        return \App\Core\Application::$app->response->redirect($path);
+    }
+}
+if (!function_exists('session')){
+    function session(){
+        return \App\Core\Application::$app->session;
+    }
+}
+
+
+
 if (!function_exists('view')){
     function view($view,$params=[]){
         return \App\Core\General\View::view($view,$params);

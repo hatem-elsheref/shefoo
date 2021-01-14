@@ -7,6 +7,7 @@ class Application{
     public Router $router;
     public Request $request;
     public Response $response;
+    public Session $session;
     public Database $connection;
     public array $config;
     public array $old=[];
@@ -15,6 +16,7 @@ class Application{
 
     public function __construct($config){
         $this->config=$config;
+        $this->session = new Session();
         $this->request = new Request();
         $this->response = new Response();
         $this->connection = new Database($this->config['database']);

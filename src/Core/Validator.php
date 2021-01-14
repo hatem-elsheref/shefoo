@@ -32,6 +32,10 @@ trait Validator
 
 
                 switch ($ruleName){
+                    case self::UNIQUE:
+                        if (!($this->findFirstBy($attributeName,$value) === false))
+                            $this->addError($attributeName,$this->messages()[$ruleName]);
+                        break;
                     case self::REQUIRED:
                         if (empty($value))
                             $this->addError($attributeName,$this->messages()[$ruleName]);

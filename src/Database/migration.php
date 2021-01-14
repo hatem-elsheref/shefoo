@@ -71,17 +71,23 @@ class migration{
 
     // drop tables
     public function reset(){
-        $migrationsFiles = scandir(MIGRATION_PATH);
-        foreach ($migrationsFiles as $file){
-            if (!($file == '.' || $file == '..')){
-                $className = pathinfo($file,PATHINFO_FILENAME);
-                echo "[".date('Y-m-d H i s',time())."] Start Removing $className Migration From Database ".PHP_EOL;
-                $classNameWithNameSpace = '\App\Database\Migrations\\'.$className;
-                $classObject = new $classNameWithNameSpace();
-                $classObject->down($this->table);
-                echo "[".date('Y-m-d H i s',time())."] Finished Removing $className Migration From Database".PHP_EOL;
-            }
+        $migrations = $this->database->prepare("show tables");
+        $migrations->execute();
+        $migrations = $migrations->fetchAll(\PDO::FETCH_COLUMN);
+        foreach ($migrations as $migration){
+            $this->database->exec("drop table $migration");
         }
+//        $migrationsFiles = scandir(MIGRATION_PATH);
+//        foreach ($migrationsFiles as $file){
+//            if (!($file == '.' || $file == '..')){
+//                $className = pathinfo($file,PATHINFO_FILENAME);
+//                echo "[".date('Y-m-d H i s',time())."] Start Removing $className Migration From Database ".PHP_EOL;
+//                $classNameWithNameSpace = '\App\Database\Migrations\\'.$className;
+//                $classObject = new $classNameWithNameSpace();
+//                $classObject->down($this->table);
+//                echo "[".date('Y-m-d H i s',time())."] Finished Removing $className Migration From Database".PHP_EOL;
+//            }
+//        }
         echo "[".date('Y-m-d H i s',time())."] All Migrations Has Been Reset Successfully .. ".PHP_EOL;
     }
     private function migrateMainTable(){

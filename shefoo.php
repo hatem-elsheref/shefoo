@@ -45,3 +45,14 @@ function start(){
     }
 }
 
+
+
+// php mailer
+// reset password
+// forget password
+// csrf protection
+// middleware
+// dashboard
+// multi language
+// release
+// composer package

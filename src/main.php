@@ -15,6 +15,7 @@ define('SRC_PATH',ROOT_PATH.DS.'src');
 define('ROUTES_PATH',SRC_PATH.DS.'Routes');
 define('CORE_PATH',SRC_PATH.DS.'Core');
 define('VIEW_PATH',SRC_PATH.DS.'Views');
+define('STORAGE_PATH',SRC_PATH.DS.'storage');
 define('DATABASE_PATH',SRC_PATH.DS.'Database');
 define('MIGRATION_PATH',DATABASE_PATH.DS.'Migrations');
 define('MODELS_PATH',SRC_PATH.DS.'Models');

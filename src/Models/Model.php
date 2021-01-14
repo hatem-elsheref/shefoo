@@ -27,4 +27,5 @@ abstract class Model extends Database {
         }
         Application::$app->old = $data;
     }
+    abstract public function schema();
 }

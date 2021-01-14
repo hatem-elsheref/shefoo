@@ -18,9 +18,9 @@ class RegisterController extends Controller {
     public function register(Request $request){
         $model = new RegisterModel();
         $model->loadData($request->body());
-
         if ($model->validate() && $model->register()){
-            var_dump('user created successfully');
+            session()->setFlash('success','user created successfully');
+            redirect('/login');
         }else{
             return view('auth.register',['model'=>$model]);
         }
