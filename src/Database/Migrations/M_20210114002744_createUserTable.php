@@ -3,20 +3,16 @@
 namespace App\Database\Migrations;
 use App\Core\Blueprint;
 class M_20210114002744_createUserTable{
-    public function up(Blueprint $table){
-        $table->start('users');
+    public function up(Blueprint $table,$tableName='users'){
+        $table->start($tableName,'InnoDB');
         $table->id();
-        $table->string('name',[[Blueprint::DEFAULT,'Hatem'],Blueprint::NULLABLE]);
+        $table->string('name');
         $table->string('email',[Blueprint::UNIQUE]);
-        $table->string('emaisd');
         $table->string('password');
-        $table->integer('passwsord');
-        $table->decimal('salary',10,2);
-        $table->enum('gender',['male','female']);
         $table->created_at();
         $table->end();
     }
-    public function down(Blueprint $table){
-        $table->dropTable('users');
+    public function down(Blueprint $table,$tableName='users'){
+        $table->dropTable($tableName);
     }
 }
